@@ -1,0 +1,12 @@
+[
+  {
+    "op": "test",
+    "path": "/spec/rules/0/host",
+    "value": "myminikube.info"
+  },
+  {
+    "op": "replace",
+    "path": "/spec/rules/0/host",
+    "value": "helloworld.io"
+  }
+]

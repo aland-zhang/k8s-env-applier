@@ -1,0 +1,11 @@
+# Replaces the entire volumes section
+spec:
+  template:
+    spec:
+      volumes:
+        - name: html
+          configMap:
+            name: hello-world-from-acme
+            items:
+              - key: index.html
+                path: index.html

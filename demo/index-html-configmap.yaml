@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  index.html: |
+    <h2>Hello World!</h2>
+kind: ConfigMap
+metadata:
+  name: hello-world
+  labels:
+    app: nginx

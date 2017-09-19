@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  index.html: |
+    <h2>Hello World from ACME!</h2>
+kind: ConfigMap
+metadata:
+  name: hello-world-from-acme
+  labels:
+    app: nginx
