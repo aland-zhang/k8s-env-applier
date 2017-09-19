@@ -148,7 +148,6 @@ doApplyAllEnvSpecificYaml(){
     return
   fi
 
-  echo ${files}
   for yamlFile in ${files}
   do
     echo "APPLYING YAML ${yamlFile}"
