@@ -6,7 +6,13 @@ It allows one to manage environment specific configuration in a unified and simp
 
 ## Download
 
-    wget --quiet https://raw.githubusercontent.com/foundery-rmb/k8s-env-applier/master/apply-all-yamls-with-patches.sh -O apply-all-yamls-with-patches.sh && chmod u+x apply-all-yamls-with-patches.sh
+    wget --quiet https://raw.githubusercontent.com/foundery-rmb/k8s-env-applier/master/apply-all-yamls-with-patches.sh -O apply-all-yamls-with-patches.sh && \
+      chmod u+x apply-all-yamls-with-patches.sh
+    
+    # OR
+    
+    curl -s -o apply-all-yamls-with-patches.sh https://raw.githubusercontent.com/foundery-rmb/k8s-env-applier/master/apply-all-yamls-with-patches.sh && \
+      chmod u+x apply-all-yamls-with-patches.sh
 
 ## Usage
 
