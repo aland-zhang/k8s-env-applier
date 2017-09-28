@@ -178,7 +178,7 @@ doApplyAllYaml(){
   for yamlFile in *.yaml
   do
     echo "UPDATING ${yamlFile%.yaml}"
-    kubectl apply --namespace ${NAMESPACE} -f "${yamlFile}" --output yaml --dry-run > temp
+    cp ${yamlFile} temp
     replaceContainerImageIfFound ${imageToUpdateName} ${newTagName} temp
     patchK8sResource "${patchesDir}" "${yamlFile%.yaml}" temp
     echo
