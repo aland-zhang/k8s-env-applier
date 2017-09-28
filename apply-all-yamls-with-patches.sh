@@ -136,24 +136,25 @@ replaceContainerImageIfFound(){
 # =============================================================================
 doApplyAllEnvSpecificYaml(){
   patchesDir=$1
-
+  appliedPatchCount=0
   files=$(shopt -s nullglob dotglob; echo ${patchesDir}/*.yaml)
-  # All files in the patches dir not prefixed with "patch-"
-  files=$(echo ${files[@]//${patchesDir}\/patch*/})
-
-  if (( ! ${#files} ))
-  then
-    echo "NO environment specific YAML files to apply"
-    echo
-    return
-  fi
 
   for yamlFile in ${files}
   do
-    echo "APPLYING YAML ${yamlFile}"
-    kubectl apply --namespace ${NAMESPACE} -f "${yamlFile}"
-    echo
+    if [[ ${yamlFile} != ${patchesDir}/patch-* ]]
+    then
+      ((++appliedPatchCount))
+      echo "APPLYING YAML ${yamlFile}"
+      kubectl apply --namespace ${NAMESPACE} -f "${yamlFile}"
+      echo
+    fi
   done
+
+  if [[ ${appliedPatchCount} -eq 0 ]]
+  then
+    echo "NO environment specific YAML files to apply"
+    echo
+  fi
 }
 
 # =============================================================================
