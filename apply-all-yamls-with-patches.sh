@@ -92,14 +92,16 @@ patchK8sResource(){
     echo "APPLYING json patch ${patchesDir}/patch-${resourceName}.json"
     cat ${tempYamlFilename} | \
       kubectl patch --namespace ${NAMESPACE} --type json --patch "$(cat "${patchesDir}/patch-${resourceName}.json")" --output yaml --local -f - \
-        > ${tempYamlFilename}
+        > patchedFile
+    cp patchedFile ${tempYamlFilename}
   fi
   if [[ -e "${patchesDir}/patch-${resourceName}.yaml" ]]
   then
     echo "APPLYING merge patch ${patchesDir}/patch-${resourceName}.yaml"
     cat ${tempYamlFilename} | \
       kubectl patch --namespace ${NAMESPACE} --type merge --patch "$(cat "${patchesDir}/patch-${resourceName}.yaml")" --output yaml --local -f - \
-        > ${tempYamlFilename}
+        > patchedFile
+    cp patchedFile ${tempYamlFilename}
   fi
 
   if [[ ! -e "${patchesDir}/patch-${resourceName}.json" && ! -e "${patchesDir}/patch-${resourceName}.yaml" ]]
@@ -173,7 +175,7 @@ doApplyAllYaml(){
   newTagName=$3
 
   # Always clean up
-  trap "rm -f temp; exit" INT TERM EXIT
+  trap "rm -f temp patchedFile; exit" INT TERM EXIT
 
   for yamlFile in *.yaml
   do
